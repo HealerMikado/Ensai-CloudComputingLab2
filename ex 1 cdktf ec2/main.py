@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from unicodedata import name
 from constructs import Construct
 from cdktf import App, TerraformStack, TerraformOutput
 from cdktf_cdktf_provider_aws.provider import AwsProvider
