@@ -43,54 +43,6 @@ class MyStack(TerraformStack):
             ]
             )
 
-        launch_template = LaunchTemplate(
-            self, "compute",
-            image_id="ami-0557a15b87f6559cf",
-            instance_type="t2.micro",
-            user_data=user_data,
-            vpc_security_group_ids=[security_group.id],
-            key_name="vockey"
-            )
-        
-        target_group = LbTargetGroup(
-            self, "target_group",
-            port=80,
-            protocol="HTTP",
-            vpc_id="vpc-08e79f3175b582837"
-        )
-        
-        elb = Lb(
-            self, "ELB",
-            load_balancer_type="application",
-            subnets=["subnet-0f52ad57bf37522f3", "subnet-0d7dd9609fe9ed2ce"],
-            security_groups=[security_group.id]
-        )
-
-        lb_listener = LbListener(
-            self, "lb_listener",
-            load_balancer_arn=elb.arn,
-            port=80,
-            protocol="HTTP",
-            default_action=[LbListenerDefaultAction(
-                type="forward",
-                target_group_arn=target_group.arn
-            )]
-            # default_action=[{"target_group_arn":target_group.arn, "type": "forward",}]
-
-        )
-
-        asg = AutoscalingGroup(
-            self,
-            "asg",
-            min_size=2,
-            desired_capacity=3,
-            max_size=4,
-            launch_template=AutoscalingGroupLaunchTemplate(id=launch_template.id),
-            vpc_zone_identifier=["subnet-0f52ad57bf37522f3", "subnet-0d7dd9609fe9ed2ce"],
-            target_group_arns=[target_group.arn]
-        )
-
-        
 
 
 app = App()
