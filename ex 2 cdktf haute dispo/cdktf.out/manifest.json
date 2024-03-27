@@ -1,0 +1,13 @@
+{
+  "version": "0.15.5",
+  "stacks": {
+    "cloud_commputing": {
+      "name": "cloud_commputing",
+      "constructPath": "cloud_commputing",
+      "workingDirectory": "stacks/cloud_commputing",
+      "synthesizedStackPath": "stacks/cloud_commputing/cdk.tf.json",
+      "annotations": [],
+      "dependencies": []
+    }
+  }
+}
